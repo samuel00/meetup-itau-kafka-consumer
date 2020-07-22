@@ -1,0 +1,26 @@
+spring:
+ profiles:
+  active: local
+
+---
+spring:
+ profiles: test
+ kafka:
+  template:
+   default-topic: SUBSCRIPTION_RESTARTED
+  consumer:
+   key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+   value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+   group-id: subscription-events-group
+
+---
+spring:
+ profiles: local
+ kafka:
+  template:
+   default-topic: subscription-default
+  consumer:
+    bootstrap-servers: localhost:9092
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    group-id: subscription-events-group
